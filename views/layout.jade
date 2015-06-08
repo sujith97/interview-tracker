@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/base.css')
+    link(rel='stylesheet', href='/bower_components/semantic-ui/dist/semantic.min.css')
+    link(rel='stylesheet', href='/bower_components/datetimepicker/jquery.datetimepicker.css')
+  body
+    block content
+    script(src='/bower_components/jquery/dist/jquery.min.js')
+    script(src='/bower_components/angular/angular.min.js')
+    script(src='/bower_components/angular-ui-router/release/angular-ui-router.min.js')
+    script(src='/bower_components/semantic-ui/dist/semantic.min.js')
+    script(src='/bower_components/datetimepicker/jquery.datetimepicker.js')
+    script(src='/javascripts/controllers/projectController.js')
+    script(src='/javascripts/services/projectService.js')
+    script(src='/javascripts/controllers/candidateController.js')
+    script(src='/javascripts/services/candidateService.js')
+    script(src='/javascripts/controllers/candidateDetailController.js')
+    script(src='/javascripts/services/candidateDetailService.js')
+    script(src='/javascripts/app.js')

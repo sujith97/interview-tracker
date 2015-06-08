@@ -1,0 +1,84 @@
+<ui-view>
+	<div class="container">
+		<div class="ui teal secondary pointing menu">
+		  <a class="active item">
+		    All Projects
+		  </a>
+		  <div class="right menu">
+		    <div class="item">
+		      <div class="ui transparent icon input">
+		        <input type="text" placeholder="Search...">
+		        <i class="search link icon"></i>
+		      </div>
+		    </div>
+		    <a class="ui item" ng-click="projectCtrl.addNewProject()">
+		    	<i class="spy icon"></i>
+		      Add
+		    </a>
+		  </div>
+		</div>
+		
+		<div class="ui card" ng-click="projectCtrl.navigateTo(project._id)" ng-repeat="project in projectCtrl.projects">
+			<div class="image">
+				<img ng-src="{{project.projectUrl}}">
+			</div>
+			<div class="content">
+				<a class="header">
+					{{project.projectName}}
+				</a>
+				<div class="meta">
+					<span "date">{{project.projectDate}}</span>
+				</div>
+				<div class="description">
+					{{project.projectPartner}}
+				</div>
+			</div>
+		</div>
+	</div>
+</ui-view>
+
+<div class="ui modal" id="addNewProject">
+  <i class="close icon"></i>
+  <div class="header">
+    New Project
+  </div>
+  <div class="content">
+    <div class="description">
+      <div class="ui header">Enter Project Details</div>
+
+      <div class="ui error form segment">
+			  
+		  <div class="two fields">
+		    <div class="field">
+		      <label>Project Name</label>
+		      <input placeholder="Project Name" type="text" ng-model="projectCtrl.newProjectName">
+		    </div>
+		    <div class="field">
+			    <label>Year</label>
+			    <input placeholder="Year" type="text" ng-model="projectCtrl.newProjectYear">
+			  </div>
+		    
+		  </div>
+		  <div class="two fields">
+			  <div class="field">
+		      <label>Project Partner</label>
+		      <input placeholder="First and Last Name" type="text" ng-model="projectCtrl.newProjectPartner">
+		    </div>
+			  <div class="field">
+			    <label>Logo URL</label>
+			    <input placeholder="URL" type="text" ng-model="projectCtrl.newProjectLogoUrl">
+			  </div>
+			</div>
+		</div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button" ng-click="projectCtrl.addProject()">
+      Save
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>

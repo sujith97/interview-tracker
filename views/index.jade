@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	.head
+		.logo-section
+			.name
+				| CAPCO
+			.bar
+			.bar
+			.bar
+	.content(ng-app="interviewTracker" ng-controller="appController")
+		.nav
+			.ui.large.vertical.menu
+				a.active.item.teal
+					i.home.icon
+					| My Projects
+				a.item.teal
+					i.mail.icon
+					| Mail
+				a.item.teal
+					i.user.icon
+					| User
+		.nav-content
+			ui-view

@@ -1,0 +1,178 @@
+<ui-view>
+  <div class="container">
+    <div class="ui teal secondary pointing menu">
+      <a class="active item">
+        Candidate
+      </a>
+      <div class="right menu">
+        <a class="ui item" ng-click="candidateDetCtrl.removeCandidate(); candidateCtrl.refreshCandidates()">
+          <i class="remove user icon"></i>
+          Remove
+        </a>
+      </div>
+    </div>
+		<div class="ui breadcrumb">
+		  <a class="section" ui-sref="projects">All Projects</a>
+		  <i class="right chevron icon divider"></i>
+		  <a class="section" ui-sref="projects.project({id: candidateDetCtrl.projectId})" ui-sref-opts="{reload:true}">All Candidates</a>
+		  <i class="right chevron icon divider"></i>
+		  <div class="active section">Candidate</div>
+		</div>
+    <div class="ui grid">
+      <div class="eleven wide column">
+       	<div class="ui raised segment secondary form">
+				  <div class="header">
+				    <h3 ng-show="candidateDetCtrl.edit" ng-model="candidateDetCtrl.candidate.candidateName" ng-click="candidateDetCtrl.edit = false">{{candidateDetCtrl.candidate.candidateName}}</h3>
+				    <input ng-model="candidateDetCtrl.candidate.candidateName" ng-show="!candidateDetCtrl.edit">
+				  </div>
+				  <p style="white-space: pre;" ng-show="candidateDetCtrl.edit" ng-click="candidateDetCtrl.edit = false" ng-model="candidateDetCtrl.candidate.candidateDescription">{{candidateDetCtrl.candidate.candidateDescription}}</p>
+				  <textarea ng-show="!candidateDetCtrl.edit" ng-model="candidateDetCtrl.candidate.candidateDescription">{{candidateDetCtrl.candidate.candidateDescription}}</textarea>
+
+				  <p><a href="{{candidateDetCtrl.candidate.candidateResume}}">Resume</a></p>
+				  <div ng-show="candidateDetCtrl.edit">
+						<a class="ui ribbon red right label">{{candidateDetCtrl.candidate.candidateStatus}}</a>
+			    </div>
+				  <div class="ui form">
+					  <div class="inline fields">
+							<div ng-show="!candidateDetCtrl.edit">
+						    <div class="field">
+						      <div class="ui radio">
+						        <input type="radio" name="cStatus" ng-value="'Active'" ng-model="candidateDetCtrl.candidate.candidateStatus">
+						        <label>Active</label>
+						      </div>
+						    </div>
+						    <div class="field">
+						      <div class="ui radio">
+						        <input type="radio" name="cStatus" ng-value="'Selected'" ng-model="candidateDetCtrl.candidate.candidateStatus">
+						        <label>Selected</label>
+						      </div>
+						    </div>
+						    <div class="field">
+						      <div class="ui radio">
+						        <input type="radio" name="cStatus" ng-value="'Rejected'" ng-model="candidateDetCtrl.candidate.candidateStatus">
+						        <label>Rejected</label>
+						      </div>
+						    </div>
+					    </div>
+					  </div>
+						<div class="ui buttons" ng-show="!candidateDetCtrl.edit">
+							<div class="ui teal button" ng-click="candidateDetCtrl.saveCandidateChanges()">
+							  <i class="save icon"></i>
+							  Save
+							</div>
+							<div class="ui button" ng-click="candidateDetCtrl.edit = true">
+							  <i class="cancel icon"></i>
+							  Cancel
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="ui segments attached" ng-repeat="interview in candidateDetCtrl.interviews">
+				  <div class="ui segment raised">
+				  	<h4>Interview {{$index + 1}}</h4>
+				  	<a class="ui teal tag label">{{interview.interviewerStatus == undefined ? 'Active' : interview.interviewerStatus}}</a><br/><br/>
+				  	<a class="ui image label">
+						  <img src="http://semantic-ui.com/images/avatar/small/justen.jpg">
+						  {{candidateDetCtrl.members[interview.interviewerId].memberName}}
+						</a>
+				    <br/><br/>
+				    <div class="ui label">
+				    	<i class="time icon"></i>
+						  {{interview.interviewDate | date:'medium'}}
+						</div>
+
+				  </div>
+				  <div class="ui secondary segment">
+				    <div class="ui styled fluid accordion feedback">
+					    <div class="active title">
+					      <i class="dropdown icon"></i>
+					      Provide Feedback
+					    </div>
+					    <div class="content">
+					      <p>
+					      	<div class="ui form">
+					      		<div class="field">
+					      			<div class="field">
+									      <div class="ui radio">
+									        <input type="radio" name="iStatus" ng-value="'Active'" ng-model="interview.interviewerStatus">
+									        <label>Active</label>
+									      </div>
+									    </div>
+								      <div class="ui">
+								        <input type="radio" name="iStatus" ng-value="'Selected'" ng-model="interview.interviewerStatus">
+								        <label>Selected</label>
+								      </div>
+								    </div>
+								    <div class="field">
+								      <div class="ui radio">
+								        <input type="radio" name="iStatus" ng-value="'Rejected'" ng-model="interview.interviewerStatus">
+								        <label>Rejected</label>
+								      </div>
+								    </div>
+
+						        <div class="field">
+						          <label>Comments</label>
+						          <textarea placeholder="Eg: Resource has strong Java skills." type="text" ng-model="interview.interviewerComments"></textarea>
+						        </div>
+										<div class="ui buttons">
+											<div class="ui teal button" ng-click="candidateDetCtrl.saveInterviewerFeedback(interview.interviewerId)">
+											  <i class="save icon"></i>
+											  Save
+											</div>
+											<div class="ui button" ng-click="candidateDetCtrl.removeInterviewer(interview.interviewerId, $index)">
+											  <i class="delete icon"></i>
+											  Delete
+											</div>
+										</div>
+						      </div>
+					      </p>
+					    </div>
+					  </div>
+				  </div>
+				</div>
+				
+      </div>
+
+      <div class="five wide column candidate-config">
+
+        <div class="ui form">
+          <h3 class="ui header">Schedule An Interview</h3>
+          <div class="field">
+            <label>Interview Date</label>
+            <input id="interviewdate" type="text" ng-model="candidateDetCtrl.interviewDate">
+          </div>
+          <div class="field">
+          	<label>Interviewer</label>
+			      <select class="ui selection dropdown" id="interviewers" ng-model="candidateDetCtrl.interviewerId">
+			        <option ng-repeat="member in candidateCtrl.members" value="{{member._id}}">{{member.memberName}}</option>
+			      </select>
+          </div>
+          <div class="ui submit button" ng-click="candidateDetCtrl.addInterview()">
+          	<i class="calendar icon"></i>
+          	Add
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ui-view>
+
+<div class="ui modal" id="feedback-modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Feedback
+  </div>
+  <div class="content">
+    <div class="description">
+      <div class="ui header">Interview feedback saved!</div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui positive right labeled icon button">
+      Ok
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
