@@ -11,8 +11,12 @@ var express = require('express'),
 	feedbackHtmlContent,
 	interviewCancelledHtmlContent;
 // mongodb://user:user123@ds037252.mongolab.com:37252/heroku_app37276936
+// mongodb://trivial:YouAreInsane1!1@ds037252.mongolab.com:37252/heroku_app37276936
 // mongodb://localhost:27017/projects
-mongoose.connect(process.env.IT_MONGOLAB_URL);
+var MONGO_URL = "mongodb://" + process.env.IT_MONGOLAB_UID + ":" 
+				+ process.env.IT_MONGOLAB_PASSWORD + "@ds045632.mongolab.com:45632/heroku_app37662283"
+console.log('MONGO: ' + MONGO_URL);
+mongoose.connect(MONGO_URL);
 
 mongoose.connection.db.dropCollection('projects');
 
