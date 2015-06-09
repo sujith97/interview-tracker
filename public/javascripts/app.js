@@ -25,7 +25,7 @@
 	})
 	.run(function($rootScope) {
 		$rootScope.constants = {
-			serverAddress : 'https://morning-savannah-7586.herokuapp.com'
+			serverAddress : 'https://interviewtracker.herokuapp.com'
 		}
 	})
 	.controller('appController', ['$scope', function($scope) {
@@ -35,5 +35,5 @@
 
 })();
 
-//https://morning-savannah-7586.herokuapp.com
-//http://localhost:3000
+// https://interviewtracker.herokuapp.com
+// http://localhost:3000
