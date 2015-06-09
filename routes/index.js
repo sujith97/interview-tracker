@@ -10,9 +10,7 @@ var express = require('express'),
 	candidateAddedHtmlContent,
 	feedbackHtmlContent,
 	interviewCancelledHtmlContent;
-// 9600367574 Sunder
-// mongodb://trivial:YouAreInsane1!1@ds037252.mongolab.com:37252/heroku_app37276936
-// mongodb://localhost:27017/projects
+
 var MONGO_URL = "mongodb://" + process.env.IT_MONGOLAB_UID + ":" 
 				+ process.env.IT_MONGOLAB_PASSWORD + "@ds045632.mongolab.com:45632/heroku_app37662283"
 mongoose.connect(MONGO_URL);
@@ -278,7 +276,7 @@ router.put('/project/:reqProjectId/candidate/:reqCandidateId/interviews/:reqInte
 });
 
 function sendEmail(interviewerEmail, model, view) {
-	var projectUrl = "https://morning-savannah-7586.herokuapp.com/#/projects/";
+	var projectUrl = "https://interviewtracker.herokuapp.com/#/projects/";
 	var emailContent = view.toString();
 	for(key in model) {
 		if (model.hasOwnProperty(key)) {
