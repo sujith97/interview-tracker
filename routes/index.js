@@ -15,8 +15,6 @@ var MONGO_URL = "mongodb://" + process.env.IT_MONGOLAB_UID + ":"
 				+ process.env.IT_MONGOLAB_PASSWORD + "@ds045632.mongolab.com:45632/heroku_app37662283"
 mongoose.connect(MONGO_URL);
 
-mongoose.connection.db.dropCollection('projects');
-
 fs.readdirSync(__dirname + '/../models').forEach(function(fileName) {
 	require(__dirname + '/../models/' + fileName);
 });
